@@ -1,0 +1,78 @@
+/* Container full screen with background */
+.Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+ background: url('/img/logine.png') no-repeat center center fixed;
+  font-family: Arial, sans-serif;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+
+}
+
+/* White box in the center */
+.inputs {
+  background:transparent;
+  padding: 40px 30px;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  width: 350px;
+  text-align: center;
+}
+
+/* Header */
+.header h1 {
+  font-size: 22px;
+  margin-bottom: 25px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+/* Input fields */
+.email,
+.Password {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  padding: 10px;
+  background: #fdfdfd;
+}
+
+.email img,
+.Password img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.email input,
+.Password input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+}
+
+/* Button */
+.button button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background-color: #ffdd57;
+  color: black;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.button button:hover {
+  background-color: #0b5ed7;
+}
