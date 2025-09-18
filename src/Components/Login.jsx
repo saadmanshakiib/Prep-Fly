@@ -1,47 +1,70 @@
-import React, { useRef } from 'react'
+
+import React, { useState } from 'react';
 import './Login.css';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 const Login = () => {
-    const navigate = useNavigate();
-    const emailRef = useRef();
-    const passRef = useRef();
+  const navigate = useNavigate();
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
 
-    const check=()=>{
-        if(emailRef.current.value == 'saadman102002@gmail.com' && passRef.current.value == "asdfgh"){
-            {navigate('Homepage')}
-        }
-        else if(emailRef.current.value == "" || passRef.current.value ==""){
-            alert("Please Fill All The Fields");
-        }
-        else if(passRef.current.value.length < 6){
-            alert("Password At Least Be 6 By Length");
-        }
-        else{
-            alert("No Matched Account Found");
-        }
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:8081/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: loginEmail,
+          password: loginPassword,
+        }),
+      });
+
+      const res = await response.text();
+      alert(res);
+
+      if (res.includes("Successfull")) {
+        navigate("/homepage");
+      }
+    } catch (err) {
+      console.error("Login failed:", err);
+      alert("Something went wrong. Please try again.");
     }
+  };
+
   return (
-    <div>
     <div className='Container'>
-        <div className='bgImg'>
+      <div className='bgImg'></div>
+
+      <div className='inputs'>
+
+        <div className='email'>
+          <img src='/public/img/usericon.png' className='userIconImg' alt="User" />
+          <input 
+            type='email' 
+            placeholder='Enter Your Email'
+            value={loginEmail}
+            onChange={(e) => setLoginEmail(e.target.value)}
+          />
         </div>
-            <div className='inputs'>
-                <div className='email'>
-                    <img src='/public/img/usericon.png' className='userIconImg'></img>
-                        <input type='email' placeholder='Enter Your Email' ref={emailRef}></input>
-                </div>
-                <div className="Password">
-                    <img src='/public/img/password.png' className='userPassImg'></img>
-                    <input type='password' placeholder='Enter 6 Digit Password' ref={passRef}></input>
-                </div>
 
-                <div className='button'>
-                        <button onClick={check}>Login</button>
-                </div>
-            </div>
-        </div>  
+        <div className="Password">
+          <img src='/public/img/password.png' className='userPassImg' alt="Password" />
+          <input 
+            type='password' 
+            placeholder='Enter 6 Digit Password'
+            value={loginPassword}
+            onChange={(e) => setLoginPassword(e.target.value)}
+          />
+        </div>
+
+        <div className='button'>
+          <button onClick={handleLogin}>Login</button>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

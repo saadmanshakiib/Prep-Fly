@@ -48,7 +48,7 @@ const confirmSignUp = async () => {
     };
 
     try{
-      const response = await fetch("http://localhost:8082/api/SignUp", {
+      const response = await fetch("http://localhost:8081/api/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData),
@@ -57,7 +57,7 @@ const confirmSignUp = async () => {
       const result = await response.text();
       alert(result);
 
-      if(result.includes("successfully")){
+      if(result.includes("SAVED")){
         navigate("/login");
       }
     } 
