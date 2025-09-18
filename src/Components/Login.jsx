@@ -13,8 +13,8 @@ const Login = () => {
         else if(emailRef.current.value == "" || passRef.current.value ==""){
             alert("Please Fill All The Fields");
         }
-        else if(passRef.current.value.length != 6){
-            alert("Password Must Be 6 By Length");
+        else if(passRef.current.value.length < 6){
+            alert("Password At Least Be 6 By Length");
         }
         else{
             alert("No Matched Account Found");
