@@ -104,4 +104,22 @@ public class UserController {
     public ResponseEntity<?> getProfileInfo(){
         return ResponseEntity.ok(profileRepo.findAll());
     }
+
+    @GetMapping("/profile/{userName}/pic")
+    public ResponseEntity<?> getProfilePic(@PathVariable String userName){
+            return profileRepo.findByUserName(userName).map(
+                    profile -> {
+                        try{
+            Path path = Paths.get(profile.getProfilePicPath());
+            byte[] img = Files.readAllBytes(path);
+            return ResponseEntity.ok()
+                    .header("Content-Type",Files.probeContentType(path))
+                    .body(img);
+                        }
+                        catch (Exception e){
+                        return ResponseEntity.status(500).build();
+                        }
+                    }).orElse(ResponseEntity.notFound().build());
+
+    }
 }
