@@ -1,105 +1,11 @@
-// import React from 'react'
-// import { useState } from 'react';
-// import axios from 'axios';
 
-// const CompleteProfile = () => {
-//         const [formData,setFormData] = useState(
-//             {
-//                 userName : "",
-//                 gender : "",
-//                 area : "",
-//                 age : ""
-//             }
-//         );
-//         const [profilePic,setProfilePic] = useState(null);
-
-//         const handleFileChange=(e)=>{
-//                 setProfilePic(e.target.files[0]);
-//         }
-
-//         const handleSubmission=async(e)=>{
-//                 e.preventDefault();
-//                 const data = new FormData();
-//                 data.append("DP",profilePic);
-//                 data.append("User_Name",formData.userName);
-//                 data.append("Age",formData.age);
-//                 data.append("Gender",formData.gender);
-//                 data.append("Area",formData.area);
-
-//         try{
-//       await axios.post("http://localhost:8081/api/profile", data, {
-//         headers: { "Content-Type": "multipart/form-data" },
-//         withCredentials: true
-//       });
-
-//       alert("Profile saved successfully!");
-//     } 
-//     catch(error){
-//       alert(error);
-//     }
-//               };
-
-
-
-//     const handleChange=(e)=>{
-//         setFormData({...formData,[e.target.name] : e.target.value});
-//     }
-
-//   return (
-//     <div>
-//       <div className='inputs'>
-
-// <form onSubmit={handleSubmission}>
-
-//             <div className='@user-name'>
-//             <input name="userName" type='text' placeholder='Enter Your User Name' onChange={handleChange}></input>
-//         </div>
-
-//             <div className='profile-pic'>
-//                 <h3>Sumbit Your Profile Picture</h3>
-//                 <input type='file' required onChange={handleFileChange}></input>
-//             </div>
-//             <div className='Gender'>
-//                 <p>Select Your Gender</p>
-//                 <select name="gender" onChange={handleChange}>
-//                     <option>Male</option>
-//                     <option>Female</option>
-//                 </select>
-//             </div>
-
-//             <div className='Age'>
-//                 <br/>
-//                 <input name='age' type='number' placeholder='Enter Your Age' onChange={handleChange}></input>
-//             </div>
-
-//             <div className='Area'>
-//                 <h3>Choose Your Area</h3>
-//                 <select name = "area" onChange={handleChange}>
-//                     <option>Dhaka</option>
-//                     <option>Chittagong</option>
-//                     <option>Rajshahi</option>
-//                     <option>Khulna</option>
-//                     <option>Mymensingh</option>
-//                     <option>Rangpur</option>
-//                     <option>Barishal</option>
-//                 </select>
-//             </div>
-            
-//             <div className='button'>
-//                 <button type='submit'>Save Profile</button>
-//             </div>
-// </form>
-
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default CompleteProfile
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const CompleteProfile = () => {
+    const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     userName: "",
     gender: "Male",
@@ -131,6 +37,8 @@ const CompleteProfile = () => {
         withCredentials: true
       });
       alert("Profile saved successfully!");
+      navigate("/showProfile");
+
     } catch (error) {
       console.error(error);
       alert("Error saving profile! Check console.");
