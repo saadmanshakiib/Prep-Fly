@@ -9,6 +9,7 @@ import './App.css'
 import Login from './Components/Login';
 import SignUp from './Components/SignUp';
 import Homepage from "./Components/Homepage";
+import CompleteProfile from "./Components/CompleteProfile";
 function App() {
   return (
     <>
@@ -29,6 +30,12 @@ function App() {
         <Route path="/signup" element={<SignUp/>}/>
 
                 <Route path="/HomePage" element={<Homepage/>}/>
+                
+                <Route path='/SignUp' element={<SignUp/>}/>
+
+                <Route path="/completeProfile" element={<CompleteProfile/>}/>
+                
+                <Route path="/showProfile" element={<showProfile/>}></Route>
         
       </Routes>
     </Router>
